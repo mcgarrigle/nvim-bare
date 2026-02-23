@@ -110,6 +110,15 @@ require("tokyonight").setup({
 
 vim.cmd[[colorscheme tokyonight]]
 
+-- treesitter
+
+MiniDeps.add('nvim-treesitter/nvim-treesitter')
+
+require('nvim-treesitter').setup({
+  ensure_installed = { 'lua', 'vimdoc', 'nushell'},
+  highlight = { enable = true },
+})
+
 -- toggleterm
 
 MiniDeps.add('akinsho/toggleterm.nvim')

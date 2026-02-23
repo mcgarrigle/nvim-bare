@@ -3,22 +3,34 @@
 ARCH=$(uname -m)
 [ $ARCH == aarch64 ] && ARCH=arm64
 
-DIR="${HOME}/.local/share"
-PACKAGE="nvim-linux-${ARCH}"
+DIR="~/.local/share"
+RELEASE="nvim-linux-${ARCH}"
 
-mkdir -p "${DIR}" && cd "${DIR}"
+function make-dir {
+  mkdir -p "$1" && cd "$1"
+}
 
-rm -rf "${DIR}/${PACKAGE}" "${DIR}/nvim"
-curl -L https://github.com/neovim/neovim/releases/latest/download/${PACKAGE}.tar.gz|tar xz
-ln -sf "${DIR}/${PACKAGE}" "${DIR}/nvim"
+function setup_neovim {
+  make-dir "${DIR}"
+	rm -rf "${DIR}/${RELEASE}" "${DIR}/nvim"
+	curl -L https://github.com/neovim/neovim/releases/latest/download/${RELEASE}.tar.gz | tar xz
+	ln -sf "${DIR}/${RELEASE}" "${DIR}/nvim"
+}
 
-export PATH="${HOME}/.local/share/nvim/bin":$PATH
+function setup_init {
+	make-dir "~/.local/share/nvim/site/pack/deps/start/"
+	git clone --filter=blob:none https://github.com/nvim-mini/mini.nvim
+}
 
-mkdir -p ~/.local/share/nvim/site/pack/deps/start/
-cd ~/.local/share/nvim/site/pack/deps/start/
+function setup_update {
+  export PATH="${HOME}/.local/share/nvim/bin":$PATH
+  nvim --headless -c 'helptags ALL' -c 'quit'
+}
 
-git clone --filter=blob:none https://github.com/nvim-mini/mini.nvim
+function setup_install {
+	setup_neovim
+	setup_init
+	setup_update
+}
 
-nvim --headless -c 'helptags ALL' -c 'quit'
-
-ls -l $DIR
+setup_${1:-install}
