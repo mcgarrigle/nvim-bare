@@ -2,7 +2,7 @@
 
 Install nvim:
 ```
-git clone https://github.com/mcgarrigle/nvim.git ~/.config/nvim
+git clone https://github.com/mcgarrigle/nvim-bare.git ~/.config/nvim
 ~/.config/nvim/setup.sh
 
 # add to .bash_profile
