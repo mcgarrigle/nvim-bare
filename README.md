@@ -10,12 +10,10 @@ export PATH="${HOME}/.local/share/nvim/bin":$PATH
 
 ```
 
-Update Lazy plugins:
+Update Mini.Deps plugins:
 ```
-nvim --headless "+Lazy! sync" +qa
-```
-
-Export:
-```
-tar cvzf nvim-complete-linux.tar.gz .local/share/nvim .local/share/nvim-linux64 .config/nvim/
+cd ~/.local/share/nvim/site/pack/deps/start/                                      
+git clone --filter=blob:none https://github.com/nvim-mini/mini.nvim     
+git clone --filter=blob:none https://github.com/akinsho/toggleterm.nvim                    
+nvim --headless -c 'helptags ALL' -c 'quit'   
 ```
