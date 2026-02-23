@@ -2,7 +2,8 @@
 
 Simple Neovim Config
 
-Based on the excellent article by Heiker Curiel [https://vonheikemen.github.io/devlog/tools/simple-neovim-config/][see here]
+Based on the excellent article by Heiker Curiel [see here](https://vonheikemen.github.io/devlog/tools/simple-neovim-config)
+
 
 Install nvim:
 ```
