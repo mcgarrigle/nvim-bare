@@ -1,14 +1,4 @@
--- NOTE: This configuration is meant for Neovim v0.11 or greater
-
--- Learn about Neovim's lua api
--- https://neovim.io/doc/user/lua-guide.html
-
--- installation
---
--- cd ~/.local/share/nvim/site/pack/deps/start/                                      
--- git clone --filter=blob:none https://github.com/nvim-mini/mini.nvim     
--- git clone --filter=blob:none https://github.com/akinsho/toggleterm.nvim                    
--- nvim --headless -c 'helptags ALL' -c 'quit'   
+-- init.lua
 
 vim.o.number = true
 vim.o.tabstop = 2
@@ -30,10 +20,7 @@ vim.keymap.set({'n', 'x'}, 'gp', '"+p', {desc = 'Paste clipboard text'})
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', {desc = 'Save file'})
 vim.keymap.set('n', '<leader>q', '<cmd>quitall<cr>', {desc = 'Exit vim'})
 
-vim.cmd.colorscheme('retrobox')
-
--- escape is missing from many IPad keyboards 
--- so '§' is used as a stand-in
+-- escape is missing from IPad keyboards so '§' is used instead
 
 vim.keymap.set('i', '§', '<ESC>', {})
 
@@ -53,17 +40,17 @@ vim.keymap.set('n', '<leader>jc', '<cmd>%!jq -c .<cr>', {})
 vim.keymap.set('n', '<leader>y', 'viwy', {})
 
 -- simple surround mappings
-vim.keymap.set('n', '<leader>sv', 'viwxi${}<ESC>P', {})      -- variable
-vim.keymap.set('n', '<leader>sV', 'viwxi"${}"<ESC>hP', {})   -- variable quoted
+vim.keymap.set('n', '<leader>sv', 'viwxi${}<ESC>P', {})     -- variable
+vim.keymap.set('n', '<leader>sV', 'viwxi"${}"<ESC>hP', {})  -- variable quoted
 
-vim.keymap.set('v', '<leader>sq', "xi''<ESC>P", {})       -- quotes
-vim.keymap.set('v', '<leader>sd', 'xi""<ESC>P', {})       -- double quotes
-vim.keymap.set('v', '<leader>sb', 'xi()<ESC>P', {})       -- brackets
-vim.keymap.set('v', '<leader>ss', 'xi{}<ESC>P', {})       -- squiglies
-vim.keymap.set('v', '<leader>sa', 'xi[]<ESC>P', {})       -- array
-vim.keymap.set('v', '<leader>sv', 'xi${}<ESC>P', {})      -- variable
-vim.keymap.set('v', '<leader>sV', 'xi"${}"<ESC>hP', {})   -- variable quoted
-vim.keymap.set('v', '<leader>sc', 'xi$()<ESC>P', {})      -- capture
+vim.keymap.set('v', '<leader>sq', "xi''<ESC>P", {})         -- quotes
+vim.keymap.set('v', '<leader>sd', 'xi""<ESC>P', {})         -- double quotes
+vim.keymap.set('v', '<leader>sb', 'xi()<ESC>P', {})         -- brackets
+vim.keymap.set('v', '<leader>ss', 'xi{}<ESC>P', {})         -- squiglies
+vim.keymap.set('v', '<leader>sa', 'xi[]<ESC>P', {})         -- array
+vim.keymap.set('v', '<leader>sv', 'xi${}<ESC>P', {})        -- variable
+vim.keymap.set('v', '<leader>sV', 'xi"${}"<ESC>hP', {})     -- variable quoted
+vim.keymap.set('v', '<leader>sc', 'xi$()<ESC>P', {})        -- capture
 
 -- function
 vim.keymap.set('n', '<leader>ss', 'A {<cr>}<ESC>ko', {})
@@ -80,22 +67,25 @@ MiniDeps.setup({})
 
 require('mini.snippets').setup({})
 require('mini.completion').setup({})
+-- require('mini.cursorword').setup({})  -- ugly
 
-require('mini.files').setup({})
-vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
+-- require('mini.files').setup({})
+-- vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
 
 require('mini.pick').setup({})
 vim.keymap.set('n', '<leader><space>', '<cmd>Pick buffers<cr>', {desc = 'Search open files'})
 vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', {desc = 'Search all files'})
 vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<cr>', {desc = 'Search help tags'})
 
-MiniDeps.add('neovim/nvim-lspconfig')
+-- airline
+
 MiniDeps.add('vim-airline/vim-airline')
 MiniDeps.add('vim-airline/vim-airline-themes')
 
 -- lastplace
 
 MiniDeps.add('ethanholz/nvim-lastplace')
+
 require'nvim-lastplace'.setup{}
 
 -- tokyonight
@@ -104,11 +94,11 @@ MiniDeps.add('folke/tokyonight.nvim')
 
 require("tokyonight").setup({
   on_colors = function (colors)
-    colors.fg_gutter = "#b2b8cf"
+  colors.fg_gutter = "#b2b8cf"
   end
 })
 
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd.colorscheme('tokyonight')
 
 -- treesitter
 
@@ -279,8 +269,12 @@ require("oil").setup({
 
 vim.keymap.set("n", "-", require('oil').open, { desc = "Open current directory" })
 
+-- lsp-config
+
 -- List of compatible language servers is here:
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+
+MiniDeps.add('neovim/nvim-lspconfig')
 
 vim.lsp.enable({'gopls', 'rust_analyzer'})
 vim.lsp.enable({'nushell'})
