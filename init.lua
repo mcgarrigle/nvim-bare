@@ -105,9 +105,11 @@ vim.cmd.colorscheme('tokyonight')
 MiniDeps.add('nvim-treesitter/nvim-treesitter')
 
 require('nvim-treesitter').setup({
+  install_dir = vim.fn.stdpath('data') .. '/site',
   ensure_installed = { 'lua', 'vimdoc', 'nushell'},
   highlight = { enable = true },
 })
+
 
 -- toggleterm
 
@@ -276,5 +278,6 @@ vim.keymap.set("n", "-", require('oil').open, { desc = "Open current directory" 
 
 MiniDeps.add('neovim/nvim-lspconfig')
 
-vim.lsp.enable({'gopls', 'rust_analyzer'})
+-- vim.lsp.enable({'gopls', 'rust_analyzer'})   -- broken
 vim.lsp.enable({'nushell'})
+vim.lsp.enable({'python'})
