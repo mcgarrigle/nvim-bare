@@ -1,13 +1,18 @@
 -- init.lua
 
 vim.o.number = true
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
 vim.o.smartcase = true
 vim.o.ignorecase = true
 vim.o.wrap = false
 vim.o.hlsearch = false
 vim.o.signcolumn = 'yes'
+
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.tabstop = 2 -- 1 tab = 2 spaces
+vim.opt.shiftwidth = 2 -- indentation rule
+vim.opt.formatoptions = 'qnj1' -- q  - comment formatting; n - numbered lists; j - remove comment when joining lines; 1 - don't break after one-letter word
+vim.opt.expandtab = true -- expand tab to spaces
 
 -- Space as the leader key
 vim.g.mapleader = vim.keycode('<Space>')
