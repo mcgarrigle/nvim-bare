@@ -12,20 +12,14 @@ function setup_neovim {
   ln -sf "${LOCATION}/${RELEASE}" "${LOCATION}/nvim"
 }
 
-function setup_mini_deps {
-  make-dir "${LOCATION}/nvim/site/pack/deps/start"
-  git clone --filter=blob:none https://github.com/nvim-mini/mini.nvim
-}
-
-function setup_update {
+function setup_plugins {
   nvim --headless -c 'helptags ALL' -c 'quit'
   echo
 }
 
 function setup_install {
   setup_neovim
-  setup_mini_deps
-  setup_update
+  setup_plugins
 }
 
 # -------------------------------------
