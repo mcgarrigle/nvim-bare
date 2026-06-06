@@ -1,11 +1,11 @@
 -- init.lua
+vim.o.wrap = false
+vim.o.hlsearch = false
+vim.o.signcolumn = 'yes'
 
 vim.o.number = true
 vim.o.smartcase = true
 vim.o.ignorecase = true
-vim.o.wrap = false
-vim.o.hlsearch = false
-vim.o.signcolumn = 'yes'
 
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -62,40 +62,21 @@ vim.keymap.set('n', '<leader>ss', 'A {<cr>}<ESC>ko', {})
 
 -- ------------------
 
-local ok, MiniDeps = pcall(require, 'mini.deps')
-if not ok then
-  vim.notify('[WARN] mini.deps module not found', vim.log.levels.WARN)
-  return
-end
-
-MiniDeps.setup({})
-
-require('mini.snippets').setup({})
-require('mini.completion').setup({})
--- require('mini.cursorword').setup({})  -- ugly
-
--- require('mini.files').setup({})
--- vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<cr>', {desc = 'File explorer'})
-
-require('mini.pick').setup({})
-vim.keymap.set('n', '<leader><space>', '<cmd>Pick buffers<cr>', {desc = 'Search open files'})
-vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', {desc = 'Search all files'})
-vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<cr>', {desc = 'Search help tags'})
-
 -- airline
 
-MiniDeps.add('vim-airline/vim-airline')
-MiniDeps.add('vim-airline/vim-airline-themes')
+vim.pack.add({'https://github.com/vim-airline/vim-airline'})
+-- MiniDeps.add('vim-airline/vim-airline')
+vim.pack.add({'https://github.com/vim-airline/vim-airline-themes'})
 
 -- lastplace
 
-MiniDeps.add('ethanholz/nvim-lastplace')
+vim.pack.add({'https://github.com/ethanholz/nvim-lastplace'})
 
 require'nvim-lastplace'.setup{}
 
 -- tokyonight
 
-MiniDeps.add('folke/tokyonight.nvim')
+vim.pack.add({'https://github.com/folke/tokyonight.nvim'})
 
 require("tokyonight").setup({
   on_colors = function (colors)
@@ -107,7 +88,7 @@ vim.cmd.colorscheme('tokyonight')
 
 -- treesitter
 
-MiniDeps.add('nvim-treesitter/nvim-treesitter')
+vim.pack.add({'https://github.com/nvim-treesitter/nvim-treesitter'})
 
 require('nvim-treesitter').setup({
   install_dir = vim.fn.stdpath('data') .. '/site',
@@ -115,10 +96,9 @@ require('nvim-treesitter').setup({
   highlight = { enable = true },
 })
 
-
 -- toggleterm
 
-MiniDeps.add('akinsho/toggleterm.nvim')
+vim.pack.add({'https://github.com/akinsho/toggleterm.nvim'})
 
 require('toggleterm').setup {
   size = 20,
@@ -145,7 +125,7 @@ require('toggleterm').setup {
 
 -- oil
 
-MiniDeps.add('stevearc/oil.nvim')
+vim.pack.add({'https://github.com/stevearc/oil.nvim'})
 
 require("oil").setup({
   -- Id is automatically added at the beginning, and name at the end
@@ -281,7 +261,7 @@ vim.keymap.set("n", "-", require('oil').open, { desc = "Open current directory" 
 -- List of compatible language servers is here:
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 
-MiniDeps.add('neovim/nvim-lspconfig')
+vim.pack.add({'https://github.com/neovim/nvim-lspconfig'})
 
 -- vim.lsp.enable({'gopls', 'rust_analyzer'})   -- broken
 vim.lsp.enable({'nushell'})
