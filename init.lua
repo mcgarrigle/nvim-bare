@@ -60,7 +60,14 @@ vim.keymap.set('v', '<leader>sc', 'xi$()<ESC>P', {})        -- capture
 -- function
 vim.keymap.set('n', '<leader>ss', 'A {<cr>}<ESC>ko', {})
 
--- ------------------
+-- --------------------------------------------------------
+
+-- telescope
+
+vim.pack.add({'https://github.com/nvim-lua/plenary.nvim'})
+vim.pack.add({'https://github.com/nvim-telescope/telescope.nvim'})
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
 
 -- airline
 
@@ -266,3 +273,4 @@ vim.pack.add({'https://github.com/neovim/nvim-lspconfig'})
 -- vim.lsp.enable({'gopls', 'rust_analyzer'})   -- broken
 vim.lsp.enable({'nushell'})
 vim.lsp.enable({'python'})
+vim.lsp.enable({'odin'})
