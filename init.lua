@@ -14,6 +14,9 @@ vim.opt.shiftwidth = 2 -- indentation rule
 vim.opt.formatoptions = 'qnj1' -- q  - comment formatting; n - numbered lists; j - remove comment when joining lines; 1 - don't break after one-letter word
 vim.opt.expandtab = true -- expand tab to spaces
 
+-- prevent E173 <n> more files to edit
+vim.cmd('cnoreabbrev q qall')
+
 -- Space as the leader key
 vim.g.mapleader = vim.keycode('<Space>')
 
